@@ -93,6 +93,13 @@ public class CompanyDAOClass implements DAO{
         String stringUpdate = null;
         int intUpdate = 0;
         System.out.println("What do you want to update:");
+        System.out.println("Enter 1 for company_id");
+        System.out.println("Enter 2 for company_name");
+        System.out.println("Enter 3 for headquarters");
+        System.out.println("Enter 4 for industry");
+        System.out.println("Enter 5 for global strategy");
+        System.out.println("Enter 6 for organizational culture");
+        System.out.println("Enter 7 for revenue in millions");
         int select = Integer.parseInt(in.nextLine());
         try {
             PreparedStatement pstmt = conn.prepareStatement("UPDATE company SET ? = ? WHERE company_id = ?");
