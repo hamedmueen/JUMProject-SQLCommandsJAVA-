@@ -35,7 +35,7 @@ public class DepartmentDAOClass implements DAO {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                Department d = new Department(rs.getInt("dept_id"), rs.getString("dept_name"), rs.getString("cell"), rs.getInt("budget"));
+                Department d = new Department(rs.getInt("dept_id"), rs.getString("dept_name"), rs.getString("cell"), rs.getInt("budget"), rs.getInt("company_id");
                 dept = d;
             }
 
