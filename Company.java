@@ -25,7 +25,9 @@ public class Company {
     }
 
     public void setCompany_id(int company_id) {
-        this.company_id = company_id;
+        if (company_id > 0){
+        	this.company_id = company_id;
+        }
     }
 
     public String getCompany_name() {
@@ -73,7 +75,9 @@ public class Company {
     }
 
     public void setRevenue_in_millions(int revenue_in_millions) {
-        this.revenue_in_millions = revenue_in_millions;
+        if (revenue_in_millions > 0){
+        	this.revenue_in_millions = revenue_in_millions;
+        }
     }
 
     @Override

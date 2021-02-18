@@ -16,7 +16,7 @@ public class CompanyDAOClass implements DAO{
                 " company_id INT PRIMARY KEY NOT NULL, " +
                 " company_name VARCHAR(20) NOT NULL, " +
                 " headquarters VARCHAR(25) NOT NULL, " +
-                " industy VARCHAR(15) NOT NULL, " +
+                " industry VARCHAR(15) NOT NULL, " +
                 " global_strategy  VARCHAR(25) NOT NULL, " +
                 " organizational_culture VARCHAR(25) NOT NULL, " +
                 " revenue_in_millions INT NOT NULL)");
