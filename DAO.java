@@ -71,7 +71,9 @@ public interface DAO {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                Department d = new Department(rs.getInt("dept_id"), rs.getString("dept_name"), rs.getString("cell"), rs.getInt("budget"), rs.getInt("company_id"));
+                Department d = new Department(rs.getInt("dept_id"), 
+                		rs.getString("dept_name"), rs.getString("cell"), 
+                		rs.getInt("budget"), rs.getInt("company_id"));
                 dept = d;
             }
 
@@ -152,14 +154,14 @@ public interface DAO {
     default Company selectCompany(int company_id) {
         Company company = null;
         try {
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM department WHERE dept_id = ?");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM company WHERE company_id = ?");
             pstmt.setInt(1, company_id);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 Company c = new Company(rs.getInt("company_id"), rs.getString("company_name"),
                         rs.getString("headquarters"), rs.getString("industry"), rs.getString("global_strategy"),
-                        rs.getString("organizational_culture"), rs.getInt("budget"));
+                        rs.getString("organizational_culture"), rs.getInt("revenue_in_millions"));
                 company = c;
             }
 

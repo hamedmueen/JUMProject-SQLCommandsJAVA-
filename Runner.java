@@ -9,6 +9,12 @@ public class Runner {
 		
     	Scanner scan = new Scanner(System.in);
     	
+//    	DepartmentDAOClass dao1 = new DepartmentDAOClass();
+//    	dao1.createTable();
+//
+//    	EmployeeDAOClass dao2 = new EmployeeDAOClass();
+//    	dao2.createTable();
+    	
     	boolean exitLoop = true;
     	
 		while(exitLoop) {
