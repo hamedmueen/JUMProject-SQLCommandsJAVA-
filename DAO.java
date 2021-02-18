@@ -23,12 +23,12 @@ public interface DAO {
         }
         return ads;
     };
-    default Address selectAddress(int id){
+    default Address selectAddress(int address_id){
         Address address = null;
 
         try {
             PreparedStatement pstmt = conn.prepareStatement("SELECT * from address where address_id = ?");
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, address_id);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 address = new Address(rs.getInt("address_id"),
@@ -51,9 +51,8 @@ public interface DAO {
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM department");
-
             while (rs.next()) {
-                Department d = new Department(rs.getInt("dept_id"), rs.getString("dept_name"), rs.getString("cell"),rs.getInt("budget"));
+                Department d = new Department(rs.getInt("dept_id"), rs.getString("dept_name"), rs.getString("cell"),rs.getInt("budget"),rs.getInt("company_id"));
                 depts.add(d);
                 System.out.println(d.toString());
             }
@@ -71,10 +70,7 @@ public interface DAO {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                Department d = new Department(rs.getInt("dept_id"),
-                        rs.getString("dept_name"),
-                        rs.getString("cell"),
-                        rs.getInt("budget"));
+                Department d = new Department(rs.getInt("dept_id"), rs.getString("dept_name"), rs.getString("cell"), rs.getInt("budget"), rs.getInt("company_id"));
                 dept = d;
             }
 
@@ -84,17 +80,93 @@ public interface DAO {
         return dept;
     }
     default List<Employee> selectAllFromEmployee(){
-        List<Employee> e = new ArrayList();
-        return e;
+        List<Employee> emps = new ArrayList<>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("Select * FROM employee");
+
+            while (rs.next()) {
+                Employee e = new Employee(rs.getInt("emp_id"),
+                        rs.getString("emp_name"),
+                        rs.getString("job_title"),
+                        rs.getInt("salary"),
+                        rs.getString("dob"),
+                        rs.getInt("dept_id"),
+                        rs.getInt("address_id"));
+                emps.add(e);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return emps;
     }
-    default Employee selectEmployee(){
-        return new Employee(0,null,null,0, null,0,0);
+
+    default Employee selectEmployee(int emp_id) {
+        Employee emp = null;
+        try{
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * from employee where emp_id = ?");
+            pstmt.setInt(1, emp_id);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()){
+                Employee e = new Employee(rs.getInt("emp_id"),
+                        rs.getString("emp_name"),
+                        rs.getString("job_title"),
+                        rs.getInt("salary"),
+                        rs.getString("dob"),
+                        rs.getInt("dept_id"),
+                        rs.getInt("address_id"));
+                        emp = e;
+            }
+            rs.close();
+            pstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
+
     default List<Company> selectAllFromCompany(){
-        List<Company> c = new ArrayList();
-        return c;
+        List<Company> comps = new ArrayList<>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("Select * FROM company");
+
+            while (rs.next()) {
+                Company c = new Company(rs.getInt("company_id"),
+                        rs.getString("company_name"),
+                        rs.getString("headquarters"),
+                        rs.getString("indsutry"),
+                        rs.getString("global_strategy"),
+                        rs.getString("organizational_culture"),
+                        rs.getInt("revenue_in_millions"));
+                comps.add(c);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return comps;
     }
-    default Company selectCompany(int company_id){ return new Company(0,null,null,null,null,null,0);}
+    default Company selectCompany(int company_id) {
+        Company company = null;
+        try {
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM department WHERE dept_id = ?");
+            pstmt.setInt(1, company_id);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Company c = new Company(rs.getInt("company_id"), rs.getString("company_name"),
+                        rs.getString("headquarters"), rs.getString("industry"), rs.getString("global_strategy"),
+                        rs.getString("organizational_culture"), rs.getInt("budget"));
+                company = c;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return company;
+    }
     boolean insert();
     boolean delete();
     boolean update();
