@@ -10,34 +10,27 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class DepartmentDAOClass implements DepartmentDAO {
+public class DepartmentDAOClass implements DAO {
 
     Connection conn = ConnectionManager.getConnection();
 
     @Override
-    public List<Department> getAllDepartments(){
-        List<Department> depts = new ArrayList<>();
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM department");
-
-            while (rs.next()) {
-                Department d = new Department(rs.getInt("dept_id"), rs.getString("dept_name"), rs.getString("cell"),rs.getInt("budget"));
-                depts.add(d);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return depts;
+    public boolean createTable() throws SQLException{
+        Statement stmt = conn.createStatement();
+        boolean count = stmt.execute("CREATE TABLE department(" +
+                " dept_id INT PRIMARY KEY NOT NULL, " +
+                " dept_name VARCHAR(20) NOT NULL, " +
+                " cell VARCHAR(15) NOT NULL, " +
+                " budget INT NOT NULL)");
+        return count;
     }
 
     @Override
-    public Department getDepartment(int id) {
+    public Department selectDepartment(int dept_id) {
         Department dept = null;
         try {
             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM department WHERE dept_id = ?");
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, dept_id);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -52,7 +45,7 @@ public class DepartmentDAOClass implements DepartmentDAO {
     }
 
     @Override
-    public boolean addDepartment() {
+    public boolean insert() {
         int rows = 0;
         Scanner in = new Scanner(System.in);
         System.out.print("Enter dept_id: ");
@@ -83,7 +76,7 @@ public class DepartmentDAOClass implements DepartmentDAO {
     }
 
     @Override
-    public boolean deleteDepartment() {
+    public boolean delete() {
         // TODO Auto-generated method stub
         int rows = 0;
         Scanner in = new Scanner(System.in);
@@ -91,7 +84,7 @@ public class DepartmentDAOClass implements DepartmentDAO {
         int dept_id = Integer.parseInt(in.nextLine());
         try{
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM department WHERE dept_id = ?");
-            pstmt.setInt(1,dept_id);
+            pstmt.setInt(2,dept_id);
             rows = pstmt.executeUpdate();
             pstmt.close();
         }
@@ -103,7 +96,7 @@ public class DepartmentDAOClass implements DepartmentDAO {
     }
 
     @Override
-    public boolean updateDepartment() {
+    public boolean update() {
         // TODO Auto-generated method stub
         int rows = 0;
         Scanner in = new Scanner(System.in);
