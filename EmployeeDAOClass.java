@@ -43,8 +43,8 @@ public class EmployeeDAOClass implements DAO {
         int address_id = Integer.parseInt(in.nextLine());
         Employee employee = new Employee(emp_id,emp_name,job_title, salary, dob, dept_id,address_id);
         try {
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO employee (emp_id, company_name, headquarters, "
-                    + " industry, global_strategy, organizational_culture, revenue_in_millions)"
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO employee (emp_id, emp_name, job_title, "
+                    + " salary, dob, dept_id, address_id)"
                     + " VALUES (?,?,?,?,?,?,?)");
             pstmt.setInt(1, employee.getEmpId());
             pstmt.setString(2, employee.getName());
