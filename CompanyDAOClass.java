@@ -1,8 +1,10 @@
 package com.cognixia.jumo.jdbc.connect;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,6 +21,49 @@ public class CompanyDAOClass implements DAO{
                 " organizational_culture VARCHAR(25) NOT NULL, " +
                 " revenue_in_millions INT NOT NULL)");
         return count;
+    }
+    
+    public Company selectCompany(int company_id) {
+    	Company company = null;
+        try {
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM department WHERE dept_id = ?");
+            pstmt.setInt(1, company_id);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Company c = new Company(rs.getInt("company_id"), rs.getString("company_name"),
+                		rs.getString("headquarters"), rs.getString("industry"), rs.getString("global_strategy"),
+                		rs.getString("organizational_culture"), rs.getInt("budget"));
+             company = c;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return company;
+    }
+    
+    public List<Company> selectAllFromCompany() {
+        List<Company> comps = new ArrayList<>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("Select * FROM company");
+
+            while (rs.next()) {
+                Company c = new Company(rs.getInt("company_id"),
+                        rs.getString("company_name"),
+                        rs.getString("headquarters"),
+                        rs.getString("indsutry"),
+                        rs.getString("global_strategy"),
+                        rs.getString("organizational_culture"),
+                        rs.getInt("revenue_in_millions"));
+                comps.add(c);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return comps;
     }
 
     @Override
