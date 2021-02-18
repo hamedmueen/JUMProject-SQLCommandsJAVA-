@@ -78,6 +78,6 @@ public class Company {
 
     @Override
     public String toString() {
-        return "[Company=;
+        return "Company [company_id=" + this.company_id + ", company_name=" + this.company_name + ", headquarters=" + this.headquarters + ", industry=" + this.industry + ", global strategy=" this.global_strategy +", organizational culture=" + this.organizational_culture +", revenue=" + this.revenue_in_millions+"]";
     }
 }
