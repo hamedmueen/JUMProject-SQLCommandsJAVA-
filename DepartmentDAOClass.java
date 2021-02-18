@@ -21,7 +21,8 @@ public class DepartmentDAOClass implements DAO {
                 " dept_id INT PRIMARY KEY NOT NULL, " +
                 " dept_name VARCHAR(20) NOT NULL, " +
                 " cell VARCHAR(15) NOT NULL, " +
-                " budget INT NOT NULL)");
+                " budget INT NOT NULL, " + 
+                " FOREIGN KEY (company_id) REFERENCES company(company_id))");
         return count;
     }
 
@@ -56,14 +57,17 @@ public class DepartmentDAOClass implements DAO {
         String cell = in.nextLine();
         System.out.println("Enter budget: ");
         int budget = Integer.parseInt(in.nextLine());
+        System.out.println("Enter Company ID: ");
+        int company_id = Integer.parseInt(in.nextLine());
         Department department = new Department(dept_id,dept_name,cell,budget);
         try {
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO department (dept_id, dept_name, cell, budget)"
-                    + " VALUES (?,?,?,?)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO department (dept_id, dept_name, cell, budget, company_id)"
+                    + " VALUES (?,?,?,?,?)");
             pstmt.setInt(1, department.getDept_id());
             pstmt.setString(2, department.getName());
             pstmt.setString(3,department.getCell());
             pstmt.setInt(4,department.getBudget());
+            pstmt.setInt(5,company_id);
             rows = pstmt.executeUpdate();
             pstmt.close();
         } catch (SQLException e) {
@@ -134,6 +138,13 @@ public class DepartmentDAOClass implements DAO {
                     System.out.println("Insert new budget");
                     intUpdate = Integer.parseInt(in.nextLine());
                     pstmt.setString(1, "budget");
+                    pstmt.setInt(2, intUpdate);
+                    pstmt.setInt(3, dept_id);
+                    break;
+                case 5:
+                    System.out.println("Insert new Company Id");
+                    intUpdate = Integer.parseInt(in.nextLine());
+                    pstmt.setString(1, "company_id");
                     pstmt.setInt(2, intUpdate);
                     pstmt.setInt(3, dept_id);
                     break;
