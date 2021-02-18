@@ -22,6 +22,7 @@ public class DepartmentDAOClass implements DAO {
                 " dept_name VARCHAR(20) NOT NULL, " +
                 " cell VARCHAR(15) NOT NULL, " +
                 " budget INT NOT NULL, " +
+                " company_id INT NOT NULL, "
                 " FOREIGN KEY (company_id) REFERENCES company(company_id))");
         return count;
     }
