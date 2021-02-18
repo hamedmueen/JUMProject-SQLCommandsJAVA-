@@ -3,7 +3,7 @@ package com.cognixia.jumo.jdbc.connect;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Scanner;
 
 public class AddressDAOClass implements DAO{
 
@@ -76,14 +76,14 @@ public class AddressDAOClass implements DAO{
         System.out.println("Enter city: ");
         String city = in.nextLine();
         System.out.println("Enter state: ");
-        String state = Integer.parseInt(in.nextLine());
+        String state = in.nextLine();
         System.out.println("Enter zip: ");
         String zip = in.nextLine();
         Address address = new Address(address_id, street, city, state, zip);
         try {
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO address (address_id, street, city, state, zip)"
                     + " VALUES (?,?,?,?,?)");
-            pstmt.setInt(1, address.getAddress_id());
+            pstmt.setInt(1, address.getId());
             pstmt.setString(2, address.getStreet());
             pstmt.setString(3, address.getCity());
             pstmt.setString(4, address.getState());
@@ -132,7 +132,7 @@ public class AddressDAOClass implements DAO{
                     stringUpdate = in.nextLine();
                     pstmt.setString(1, "city");
                     pstmt.setString(2, stringUpdate);
-                    pstmt.setInt(3, addree_id);
+                    pstmt.setInt(3, address_id);
                     break;
                 case 4:
                     System.out.println("Insert new state");
