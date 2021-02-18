@@ -111,6 +111,10 @@ public class DepartmentDAOClass implements DAO {
         String stringUpdate = null;
         int intUpdate = 0;
         System.out.println("What do you want to update:");
+        System.out.println("Enter 1 for dept_id");
+        System.out.println("Enter 2 for dept_name");
+        System.out.println("Enter 3 for cell");
+        System.out.println("Enter 4 for budget");
         int select = Integer.parseInt(in.nextLine());
         try {
             PreparedStatement pstmt = conn.prepareStatement("UPDATE department SET ? = ? WHERE dept_id = ?");
