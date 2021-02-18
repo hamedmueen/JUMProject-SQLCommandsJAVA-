@@ -22,9 +22,9 @@ public class EmployeeDAOClass implements DAO {
     }
 
     @Override
-    public boolean insert() {
+    public boolean insert(Scanner in) {
         int rows = 0;
-        Scanner in = new Scanner(System.in);
+//        Scanner in = new Scanner(System.in);
         System.out.print("Enter emp_id: ");
         int emp_id = Integer.parseInt(in.nextLine());
         System.out.println("Enter emp_name: ");
@@ -57,14 +57,14 @@ public class EmployeeDAOClass implements DAO {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        in.close();
+//        in.close();
         return rows == 1;
     }
 
     @Override
-    public boolean delete() {
+    public boolean delete(Scanner in) {
         int rows = 0;
-        Scanner in = new Scanner(System.in);
+//        Scanner in = new Scanner(System.in);
         System.out.println("Enter emp_id: ");
         int emp_id = Integer.parseInt(in.nextLine());
         try{
@@ -76,15 +76,15 @@ public class EmployeeDAOClass implements DAO {
         catch(SQLException e){
             e.printStackTrace();
         }
-        in.close();
+//        in.close();
         return rows ==1;
     }
 
     @Override
-    public boolean update() {
+    public boolean update(Scanner in) {
         // TODO Auto-generated method stub
         int rows = 0;
-        Scanner in = new Scanner(System.in);
+//        Scanner in = new Scanner(System.in);
         System.out.println("Enter emp_id: ");
         int emp_id = Integer.parseInt(in.nextLine());
         String stringUpdate = null;
@@ -151,7 +151,7 @@ public class EmployeeDAOClass implements DAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        in.close();
+//        in.close();
         return rows ==1;
     }
 }

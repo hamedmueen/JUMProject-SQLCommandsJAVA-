@@ -3,6 +3,7 @@ package com.cognixia.jumo.jdbc.connect;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public interface DAO {
     Connection conn = ConnectionManager.getConnection();
@@ -167,8 +168,8 @@ public interface DAO {
         }
         return company;
     }
-    boolean insert();
-    boolean delete();
-    boolean update();
+    boolean insert(Scanner scan);
+    boolean delete(Scanner scan);
+    boolean update(Scanner scan);
     boolean createTable() throws SQLException;
 }
