@@ -4,7 +4,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 public interface DAO {
     Connection conn = ConnectionManager.getConnection();
     default List<Address> selectAllFromAddress(){
@@ -17,6 +16,7 @@ public interface DAO {
             while(rs.next()){
                 Address a = new Address(rs.getInt("address_id"),rs.getString("street"),rs.getString("city"),rs.getString("state"),rs.getString("zip"));
                 ads.add(a);
+                System.out.println(a.toString());
             }
         }
         catch(SQLException e){
@@ -32,11 +32,12 @@ public interface DAO {
             pstmt.setInt(1, address_id);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                address = new Address(rs.getInt("address_id"),
+                Address a = new Address(rs.getInt("address_id"),
                         rs.getString("street"),
                         rs.getString("city"),
                         rs.getString("state"),
                         rs.getString("zip_code"));
+                        address = a;
             }
             rs.close();
             pstmt.close();
@@ -71,9 +72,7 @@ public interface DAO {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                Department d = new Department(rs.getInt("dept_id"), 
-                		rs.getString("dept_name"), rs.getString("cell"), 
-                		rs.getInt("budget"), rs.getInt("company_id"));
+                Department d = new Department(rs.getInt("dept_id"), rs.getString("dept_name"), rs.getString("cell"), rs.getInt("budget"), rs.getInt("company_id"));
                 dept = d;
             }
 
@@ -97,6 +96,7 @@ public interface DAO {
                         rs.getInt("dept_id"),
                         rs.getInt("address_id"));
                 emps.add(e);
+                System.out.println(e.toString());
             }
 
         } catch (SQLException e) {
@@ -119,14 +119,14 @@ public interface DAO {
                         rs.getString("dob"),
                         rs.getInt("dept_id"),
                         rs.getInt("address_id"));
-                        emp = e;
+                        emp =e;
             }
             rs.close();
             pstmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return emp;
     }
 
     default List<Company> selectAllFromCompany(){
@@ -144,6 +144,7 @@ public interface DAO {
                         rs.getString("organizational_culture"),
                         rs.getInt("revenue_in_millions"));
                 comps.add(c);
+                System.out.println(c.toString());
             }
 
         } catch (SQLException e) {
@@ -154,14 +155,14 @@ public interface DAO {
     default Company selectCompany(int company_id) {
         Company company = null;
         try {
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM company WHERE company_id = ?");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM department WHERE dept_id = ?");
             pstmt.setInt(1, company_id);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 Company c = new Company(rs.getInt("company_id"), rs.getString("company_name"),
                         rs.getString("headquarters"), rs.getString("industry"), rs.getString("global_strategy"),
-                        rs.getString("organizational_culture"), rs.getInt("revenue_in_millions"));
+                        rs.getString("organizational_culture"), rs.getInt("budget"));
                 company = c;
             }
 
@@ -170,8 +171,8 @@ public interface DAO {
         }
         return company;
     }
-    boolean insert(Scanner scan);
-    boolean delete(Scanner scan);
-    boolean update(Scanner scan);
+    boolean insert(Scanner in);
+    boolean delete(Scanner in);
+    boolean update(Scanner in);
     boolean createTable() throws SQLException;
 }
