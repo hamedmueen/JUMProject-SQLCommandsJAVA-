@@ -4,9 +4,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class javaconnector {
-    private static final String URLUnix = "jdbc:mysql://localhost:3306/university?serverTimeZone=EST5EDT";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "redmonkey";
+    private static final String URLUnix = "jdbc:mysql://database-1.cysgoj3prnni.us-west-1.rds.amazonaws.com:3306/university?serverTimeZone=EST5EDT";
+    private static final String USERNAME = "JUMP";
+    private static final String PASSWORD = "thiisit";
 
 
     public static Connection getConnection(){
