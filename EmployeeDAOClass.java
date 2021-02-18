@@ -16,6 +16,8 @@ public class EmployeeDAOClass implements DAO {
                 " job_title VARCHAR(20) NOT NULL," +
                 " salary INT NOT NULL," +
                 " dob VARCHAR(10) NOT NULL," +
+                " dept_id INT NOT NULL, " +
+                " address_id INT NOT NULL, " +
                 " FOREIGN KEY (dept_id) REFERENCES department(dept_id)," +
                 " FOREIGN KEY (address_id) REFERENCES address(address_id))");
         return count;
