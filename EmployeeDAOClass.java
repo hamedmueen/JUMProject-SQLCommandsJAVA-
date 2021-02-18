@@ -92,6 +92,13 @@ public class EmployeeDAOClass implements DAO {
         String stringUpdate = null;
         int intUpdate = 0;
         System.out.println("What do you want to update: ");
+        System.out.println("Enter 1 for emp_id");
+        System.out.println("Enter 2 for emp_name");
+        System.out.println("Enter 3 for job_title");
+        System.out.println("Enter 4 for salary");
+        System.out.println("Enter 5 for dob");
+        System.out.println("Enter 6 for dept_id");
+        System.out.println("Enter 7 for address id");
         int select = Integer.parseInt(in.nextLine());
         try {
             PreparedStatement pstmt = conn.prepareStatement("UPDATE employee SET ? = ? WHERE emp_id = ?");
