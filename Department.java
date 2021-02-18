@@ -6,20 +6,30 @@ public class Department {
     private String cell;
     private int budget;
     private int dept_id;
+    private int company_id;
 
-    public Department(int dept_id,String dept_name, String cell, int budget) {
+    public Department(int dept_id,String dept_name, String cell, int budget, int company_id) {
         super();
         this.dept_name = dept_name;
         this.dept_id = dept_id;
         this.cell = cell;
         this.budget = budget;
+        this.company_id= company_id;
+    }
+
+    public int getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(int company_id) {
+        this.company_id = company_id;
     }
 
     public String getName() {
         return dept_name;
     }
 
-    public void setName(String dept_name) {
+    public void setName(String name) {
         this.dept_name = dept_name;
     }
 
@@ -49,6 +59,6 @@ public class Department {
 
     @Override
     public String toString(){
-        return this.dept_name + " " + this.cell + " " + this.budget + " ";
+        return this.dept_id + " " + this.dept_name + " " + this.cell + " " + this.budget + " ";
     }
 }
