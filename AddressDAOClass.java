@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class AddressDAOClass implements DAO{
 
     Connection conn = ConnectionManager.getConnection();
@@ -22,52 +23,8 @@ public class AddressDAOClass implements DAO{
     }
 
     @Override
-    public List<Address> selectAllFromAddress() {
-        Connection conn = ConnectionManager.getConnection();
-       List<Address> ads = new ArrayList<>();
-       try{
-           Statement stmt = conn.createStatement();
-           ResultSet rs = stmt.executeQuery("SELECT * FROM address");
-
-           while(rs.next()){
-               Address a = new Address(rs.getInt("address_id"),rs.getString("street"),rs.getString("city"),rs.getString("state"),rs.getString("zip"));
-               ads.add(a);
-           }
-       }
-       catch(SQLException e){
-           e.printStackTrace();
-       }
-       return ads;
-    }
-
-    @Override
-    public Address selectAddress(int id) {
-        Address address = null;
-
-        try {
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * from address where address_id = ?");
-            pstmt.setInt(1, id);
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                address = new Address(rs.getInt("address_id"),
-                        rs.getString("street"),
-                        rs.getString("city"),
-                        rs.getString("state"),
-                        rs.getString("zip"));
-            }
-            rs.close();
-            pstmt.close();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        return address;
-    }
-
-    @Override
     public boolean insert() {
-       int rows = 0;
+        int rows = 0;
         Scanner in = new Scanner(System.in);
         System.out.print("Enter address_id: ");
         int address_id = Integer.parseInt(in.nextLine());
@@ -76,7 +33,7 @@ public class AddressDAOClass implements DAO{
         System.out.println("Enter city: ");
         String city = in.nextLine();
         System.out.println("Enter state: ");
-        String state = in.nextLine();
+        String state =in.nextLine();
         System.out.println("Enter zip: ");
         String zip = in.nextLine();
         Address address = new Address(address_id, street, city, state, zip);
@@ -181,3 +138,4 @@ public class AddressDAOClass implements DAO{
     }
 
 }
+
