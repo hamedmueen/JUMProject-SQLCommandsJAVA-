@@ -3,12 +3,23 @@ package com.cognixia.jumo.jdbc.connect;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class Runner {
+public class Runner extends ConnectionManager{
 	
 	public static void main(String[] args) throws SQLException {
 		
     	Scanner scan = new Scanner(System.in);
-    	
+    	Scanner scan = new Scanner(System.in);
+        while(true) {
+            System.out.println("Enter username: ");
+            user = scan.nextLine();
+            System.out.println("Enter password: ");
+            password = scan.nextLine();
+            if (!password.equals("thisisit") && user.equals("JUMP")) {
+                System.out.println("Invalid password.");
+            } else {
+                break;
+            }
+        }
 //    	DepartmentDAOClass dao1 = new DepartmentDAOClass();
 //    	dao1.createTable();
 //
