@@ -27,7 +27,7 @@ public class EmployeeDAOClass implements DAO {
         List<Employee> emps = new ArrayList<>();
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("Select * FROM department");
+            ResultSet rs = stmt.executeQuery("Select * FROM employee");
 
             while (rs.next()) {
                 Employee e = new Employee(rs.getInt("emp_id"),
@@ -50,14 +50,17 @@ public class EmployeeDAOClass implements DAO {
     public Employee selectEmployee() {
         Department department = null;
         try{
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * from address where emp_id = ?");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * from employee where emp_id = ?");
             //pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             while(rs.next()){
-                department= new Department(rs.getInt("dept_id"),
-                        rs.getString("dept_name"),
-                        rs.getString("cell"),
-                        rs.getInt("budget"));
+                department= new Department(rs.getInt("emp_id"),
+                        rs.getString("emp_name"),
+                        rs.getString("job_title"),
+                        rs.getInt("salary"));
+                        rs.getDate("dob"),
+                        rs.getInt("dept_id"),
+                        rs.getInt("address_id"));
             }
             rs.close();
             pstmt.close();
@@ -74,11 +77,96 @@ public class EmployeeDAOClass implements DAO {
 
     @Override
     public boolean delete() {
-        return false;
+        int rows = 0;
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter emp_id: ");
+        int address_id = Integer.parseInt(in.nextLine());
+        try{
+            PreparedStatement pstmt = conn.prepareStatement("DELETE FROM employee WHERE emp_id = ?");
+            pstmt.setInt(2,emp_id);
+            rows = pstmt.executeUpdate();
+            pstmt.close();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        in.close();
+        return rows ==1;
+    }
     }
 
     @Override
     public boolean update() {
-        return false;
+        // TODO Auto-generated method stub
+        int rows = 0;
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter emp_id: ");
+        int emp_id = Integer.parseInt(in.nextLine());
+        String stringUpdate = null;
+        int intUpdate = 0;
+        System.out.println("What do you want to update: ");
+        int select = Integer.parseInt(in.nextLine());
+        try {
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE employee SET ? = ? WHERE emp_id = ?");
+            switch (select) {
+                case 1:
+                    System.out.println("Insert new emp_id: ");
+                    intUpdate = Integer.parseInt(in.nextLine());
+                    pstmt.setString(1, "emp_id");
+                    pstmt.setInt(2, intUpdate);
+                    pstmt.setInt(3, emp_id);
+                    break;
+                case 2:
+                    System.out.println("Insert new emp_name: ");
+                    stringUpdate = in.nextLine();
+                    pstmt.setString(1, "emp_name");
+                    pstmt.setString(2, stringUpdate);
+                    pstmt.setInt(3, emp_id);
+                    break;
+                case 3:
+                    System.out.println("Insert new job_title");
+                    stringUpdate = in.nextLine();
+                    pstmt.setString(1, "job_title");
+                    pstmt.setString(2, stringUpdate);
+                    pstmt.setInt(3, emp_id);
+                    break;
+                case 4:
+                    System.out.println("Insert new salary");
+                    intUpdate = Integer.parseInt(in.nextLine());
+                    pstmt.setInt(1, "salary");
+                    pstmt.setString(2, stringUpdate);
+                    pstmt.setInt(3, emp_id);
+                    break;
+                case 5:
+                    System.out.println("Insert new dob");
+                    intUpdate = Integer.parseInt(in.nextLine());
+                    pstmt.setString(1, "zip");
+                    pstmt.setString(2, stringUpdate);
+                    pstmt.setInt(3, emp_id);
+                    break;
+                case 6:
+                    System.out.println("Insert new dept_id");
+                    intUpdate = Integer.parseInt(in.nextLine());
+                    pstmt.setInt(1, "dept_id");
+                    pstmt.setString(2, stringUpdate);
+                    pstmt.setInt(3, emp_id);
+                    break;
+                case 7:
+                    System.out.println("Insert new address_id)
+                    pstmt.setInt(1, "_id");
+                    pstmt.setString(2, stringUpdate);
+                    pstmt.setInt(3, emp_id);
+                    break;
+                default:
+                    System.out.println("Invalid input");
+                    break;
+            }
+            rows = pstmt.executeUpdate();
+            pstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        in.close();
+        return rows ==1;
     }
 }
