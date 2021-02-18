@@ -5,12 +5,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class AddressDAOClass implements AddressDAO{
+public class AddressDAOClass implements DAO{
 
     Connection conn = ConnectionManager.getConnection();
 
     @Override
-    public List<Address> getAllAddresses() {
+    public boolean createTable() throws SQLException {
+        Statement stmt = conn.createStatement();
+        boolean count = stmt.execute("CREATE TABLE address(" +
+                " address_id INT PRIMARY KEY NOT NULL," +
+                " street VARCHAR(50) NOT NULL," +
+                " city VARCHAR(20) NOT NULL," +
+                " state VARCHAR(20) NOT NULL," +
+                " zip VARCHAR(15) NOT NULL)");
+        return count;
+    }
+
+    @Override
+    public List<Address> selectAllFromAddress() {
         Connection conn = ConnectionManager.getConnection();
        List<Address> ads = new ArrayList<>();
        try{
@@ -29,7 +41,7 @@ public class AddressDAOClass implements AddressDAO{
     }
 
     @Override
-    public Address getAddress(int id) {
+    public Address selectAddress(int id) {
         Address address = null;
 
         try {
@@ -54,22 +66,21 @@ public class AddressDAOClass implements AddressDAO{
     }
 
     @Override
-    public boolean addAddress(Address address) {
+    public boolean insert() {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean updateAddress(Address address) {
+    public boolean update() {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean deleteAddress(int id) {
+    public boolean delete() {
         // TODO Auto-generated method stub
         return false;
     }
 
 }
-
