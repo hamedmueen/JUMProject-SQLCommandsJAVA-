@@ -78,6 +78,6 @@ public class Company {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "[Company=;
     }
 }

@@ -78,9 +78,9 @@ public class Employee {
     public void setAddId(int address_id) {
         this.address_id = address_id;
     }
-
+ 
     @Override
     public String toString() {
-        return emp_id + " " + this.emp_name + " " + this.job_title + " " + this.salary + " " + this.dob + " " + this.dept_id;
+        return "Employee [emp_id=" + this.emp_id + ", emp_name=" + this.emp_name + ", job_title=" + this.job_title + ", salary=" + this.salary + ", dob=" + this.dob + ", dept_id=" + this.dept_id +"address_id=" + this.address_id +"]";
     }
 }
