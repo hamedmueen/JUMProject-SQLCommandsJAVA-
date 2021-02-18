@@ -153,7 +153,7 @@ public class EmployeeDAOClass implements DAO {
                     break;
                 case 7:
                     System.out.println("Insert new address_id)
-                    pstmt.setInt(1, "_id");
+                    pstmt.setInt(1, "address_id");
                     pstmt.setString(2, stringUpdate);
                     pstmt.setInt(3, emp_id);
                     break;
