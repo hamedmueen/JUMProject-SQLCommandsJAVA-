@@ -2,13 +2,23 @@ package com.cognixia.jumo.jdbc.connect;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Scanner;
 
 public class CompanyDAOClass implements DAO{
     @Override
     public boolean createTable() throws SQLException {
-        return false;
+    	Statement stmt = conn.createStatement();
+        boolean count = stmt.execute("CREATE TABLE company(" +
+                " company_id INT PRIMARY KEY NOT NULL, " +
+                " company_name VARCHAR(20) NOT NULL, " +
+                " headquarters VARCHAR(25) NOT NULL, " +
+                " industy VARCHAR(15) NOT NULL, " +
+                " global_strategy  VARCHAR(25) NOT NULL, " +
+                " organizational_culture VARCHAR(25) NOT NULL, " +
+                " revenue_in_millions INT NOT NULL)");
+        return count;
     }
 
     @Override
@@ -74,6 +84,76 @@ public class CompanyDAOClass implements DAO{
 
     @Override
     public boolean update() {
-        return false;
+    	int rows = 0;
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter company_id: ");
+        int company_id = Integer.parseInt(in.nextLine());
+        String stringUpdate = null;
+        int intUpdate = 0;
+        System.out.println("What do you want to update:");
+        int select = Integer.parseInt(in.nextLine());
+        try {
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE company SET ? = ? WHERE company_id = ?");
+            switch (select) {
+                case 1:
+                    System.out.println("Insert new company_id: ");
+                    intUpdate = Integer.parseInt(in.nextLine());
+                    pstmt.setString(1, "company_id");
+                    pstmt.setInt(2, intUpdate);
+                    pstmt.setInt(3, company_id);
+                    break;
+                case 2:
+                    System.out.println("Insert new company_name");
+                    stringUpdate = in.nextLine();
+                    pstmt.setString(1, "company_name");
+                    pstmt.setString(2, stringUpdate);
+                    pstmt.setInt(3, company_id);
+                    break;
+                case 3:
+                    System.out.println("Insert new headquarters");
+                    stringUpdate = in.nextLine();
+                    pstmt.setString(1, "headquarters");
+                    pstmt.setString(2, stringUpdate);
+                    pstmt.setInt(3, company_id);
+                    break;
+                case 4:
+                    System.out.println("Insert new industry");
+                    stringUpdate = in.nextLine();
+                    pstmt.setString(1, "industry");
+                    pstmt.setString(2, stringUpdate);
+                    pstmt.setInt(3, company_id);
+                    break;
+                case 5:
+                    System.out.println("Insert new global_strategy");
+                    stringUpdate = in.nextLine();
+                    pstmt.setString(1, "global_strategy");
+                    pstmt.setString(2, stringUpdate);
+                    pstmt.setInt(3, company_id);
+                    break;
+                case 6:
+                    System.out.println("Insert new organizational_culture");
+                    stringUpdate = in.nextLine();
+                    pstmt.setString(1, "organizational_culture");
+                    pstmt.setString(2, stringUpdate);
+                    pstmt.setInt(3, company_id);
+                    break;
+                case 7:
+                    System.out.println("Insert new revenue_in_millions");
+                    intUpdate = Integer.parseInt(in.nextLine());
+                    pstmt.setString(1, "revenue_in_millions");
+                    pstmt.setInt(2, intUpdate);
+                    pstmt.setInt(3, company_id);
+                    break;
+                default:
+                    System.out.println("Invalid input");
+                    break;
+            }
+            rows = pstmt.executeUpdate();
+            pstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        in.close();
+        return rows ==1;
     }
 }
