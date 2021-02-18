@@ -1,6 +1,5 @@
 package com.cognixia.jumo.jdbc.connect;
 
-import java.util.Date;
 
 public class Employee {
 
@@ -8,12 +7,12 @@ public class Employee {
     private String emp_name;
     private String job_title;
     private int salary;
-    private Date dob;
+    private String dob;
     private int dept_id;
     private int address_id;
 
 
-    public Employee(int emp_id, String emp_name, String job_title, int salary, Date dob, int dept_id, int address_id) {
+    public Employee(int emp_id, String emp_name, String job_title, int salary, String dob, int dept_id, int address_id) {
         this.emp_id = emp_id;
         this.emp_name = emp_name;
         this.job_title = job_title;
@@ -31,7 +30,7 @@ public class Employee {
         return emp_name;
     }
 
-    public void setName(String emp_name) {
+    public void setName(String name) {
         this.emp_name = emp_name;
     }
 
@@ -55,11 +54,11 @@ public class Employee {
         this.emp_id = empId;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 
@@ -67,7 +66,7 @@ public class Employee {
         return dept_id;
     }
 
-    public void setDeptId(int dept_id) {
+    public void setDeptId(int deptId) {
         this.dept_id = dept_id;
     }
 
@@ -75,12 +74,12 @@ public class Employee {
         return address_id;
     }
 
-    public void setAddId(int address_id) {
+    public void setAddId(int addId) {
         this.address_id = address_id;
     }
- 
+
     @Override
     public String toString() {
-        return "Employee [emp_id=" + this.emp_id + ", emp_name=" + this.emp_name + ", job_title=" + this.job_title + ", salary=" + this.salary + ", dob=" + this.dob + ", dept_id=" + this.dept_id +"address_id=" + this.address_id +"]";
+        return emp_id + " " + this.emp_name + " " + this.job_title + " " + this.salary + " " + this.dob + " " + this.dept_id;
     }
 }
