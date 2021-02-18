@@ -66,6 +66,11 @@ public class AddressDAOClass implements DAO{
         String stringUpdate = null;
         int intUpdate = 0;
         System.out.println("What do you want to update:");
+        System.out.println("Enter 1 for address id");
+        System.out.println("Enter 2 for street");
+        System.out.println("Enter 3 for city");
+        System.out.println("Enter 4 for state");
+        System.out.println("Enter 5 for zip");
         int select = Integer.parseInt(in.nextLine());
         try {
             PreparedStatement pstmt = conn.prepareStatement("UPDATE address SET ? = ? WHERE dept_id = ?");
@@ -136,6 +141,4 @@ public class AddressDAOClass implements DAO{
 //        in.close();
         return rows ==1;
     }
-
 }
-
