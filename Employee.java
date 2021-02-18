@@ -31,7 +31,7 @@ public class Employee {
         return emp_name;
     }
 
-    public void setName(String name) {
+    public void setName(String emp_name) {
         this.emp_name = emp_name;
     }
 
@@ -67,7 +67,7 @@ public class Employee {
         return dept_id;
     }
 
-    public void setDeptId(int deptId) {
+    public void setDeptId(int dept_id) {
         this.dept_id = dept_id;
     }
 
@@ -75,7 +75,7 @@ public class Employee {
         return address_id;
     }
 
-    public void setAddId(int addId) {
+    public void setAddId(int address_id) {
         this.address_id = address_id;
     }
 

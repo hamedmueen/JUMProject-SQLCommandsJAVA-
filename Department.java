@@ -19,7 +19,7 @@ public class Department {
         return dept_name;
     }
 
-    public void setName(String name) {
+    public void setName(String dept_name) {
         this.dept_name = dept_name;
     }
 

@@ -18,7 +18,7 @@ public class Address {
     public int getId() {
         return address_id;
     }
-    public void setId(int id) {
+    public void setId(int address_id) {
         this.address_id = address_id;
     }
     public String getStreet() {
