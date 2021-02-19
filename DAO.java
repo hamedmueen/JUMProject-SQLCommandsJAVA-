@@ -139,7 +139,7 @@ public interface DAO {
                 Company c = new Company(rs.getInt("company_id"),
                         rs.getString("company_name"),
                         rs.getString("headquarters"),
-                        rs.getString("indsutry"),
+                        rs.getString("industry"),
                         rs.getString("global_strategy"),
                         rs.getString("organizational_culture"),
                         rs.getInt("revenue_in_millions"));
