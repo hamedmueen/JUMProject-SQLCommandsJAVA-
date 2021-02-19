@@ -90,7 +90,7 @@ public class DepartmentDAOClass implements DAO {
         int dept_id = Integer.parseInt(in.nextLine());
         try{
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM department WHERE dept_id = ?");
-            pstmt.setInt(2,dept_id);
+            pstmt.setInt(1,dept_id);
             rows = pstmt.executeUpdate();
             pstmt.close();
         }
