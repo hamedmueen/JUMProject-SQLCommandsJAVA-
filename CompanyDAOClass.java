@@ -73,7 +73,7 @@ public class CompanyDAOClass implements DAO{
         int company_id = Integer.parseInt(in.nextLine());
         try{
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM company WHERE company_id = ?");
-            pstmt.setInt(2, company_id);
+            pstmt.setInt(1, company_id);
             rows = pstmt.executeUpdate();
             pstmt.close();
         }
