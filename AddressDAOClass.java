@@ -131,7 +131,7 @@ public class AddressDAOClass implements DAO{
         int address_id = Integer.parseInt(in.nextLine());
         try{
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM address WHERE dept_id = ?");
-            pstmt.setInt(2,address_id);
+            pstmt.setInt(1,address_id);
             rows = pstmt.executeUpdate();
             pstmt.close();
         }
