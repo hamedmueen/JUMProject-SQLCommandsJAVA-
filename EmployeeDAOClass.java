@@ -134,14 +134,14 @@ public class EmployeeDAOClass implements DAO {
                     System.out.println("Insert new salary");
                     intUpdate = Integer.parseInt(in.nextLine());
                     PreparedStatement pstmt4 = conn.prepareStatement("UPDATE employee SET salary = ? WHERE emp_id = ?");
-                    pstmt4.setString(1, stringUpdate);
+                    pstmt4.setInt(1, intUpdate);
                     pstmt4.setInt(2, emp_id);
                     rows = pstmt4.executeUpdate();
                     pstmt4.close();
                     break;
                 case 5:
                     System.out.println("Insert new dob");
-                    intUpdate = Integer.parseInt(in.nextLine());
+                    stringUpdate = in.nextLine();
                     PreparedStatement pstmt5 = conn.prepareStatement("UPDATE employee SET dob = ? WHERE emp_id = ?");
                     pstmt5.setString(1, stringUpdate);
                     pstmt5.setInt(2, emp_id);
@@ -152,15 +152,16 @@ public class EmployeeDAOClass implements DAO {
                     System.out.println("Insert new dept_id");
                     intUpdate = Integer.parseInt(in.nextLine());
                     PreparedStatement pstmt6 = conn.prepareStatement("UPDATE employee SET dept_id = ? WHERE emp_id = ?");
-                    pstmt6.setString(1, stringUpdate);
+                    pstmt6.setInt(1, intUpdate);
                     pstmt6.setInt(2, emp_id);
                     rows = pstmt6.executeUpdate();
                     pstmt6.close();
                     break;
                 case 7:
                     System.out.println("Insert new address_id");
+                    intUpdate = Integer.parseInt(in.nextLine());
                     PreparedStatement pstmt7 = conn.prepareStatement("UPDATE employee SET address_id = ? WHERE emp_id = ?");
-                    pstmt7.setString(1, stringUpdate);
+                    pstmt7.setString(1, intUpdate);
                     pstmt7.setInt(2, emp_id);
                     rows = pstmt7.executeUpdate();
                     pstmt7.close();
