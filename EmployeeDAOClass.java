@@ -71,7 +71,7 @@ public class EmployeeDAOClass implements DAO {
         int emp_id = Integer.parseInt(in.nextLine());
         try{
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM employee WHERE emp_id = ?");
-            pstmt.setInt(2,emp_id);
+            pstmt.setInt(1,emp_id);
             rows = pstmt.executeUpdate();
             pstmt.close();
         }
