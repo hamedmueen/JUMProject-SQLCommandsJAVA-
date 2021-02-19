@@ -155,7 +155,7 @@ public interface DAO {
     default Company selectCompany(int company_id) {
         Company company = null;
         try {
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM department WHERE company_id = ?");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM company WHERE company_id = ?");
             pstmt.setInt(1, company_id);
             ResultSet rs = pstmt.executeQuery();
 
