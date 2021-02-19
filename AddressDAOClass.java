@@ -1,8 +1,6 @@
 package com.cognixia.jumo.jdbc.connect;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 
@@ -61,7 +59,7 @@ public class AddressDAOClass implements DAO{
         // TODO Auto-generated method stub
         int rows = 0;
 //        Scanner in = new Scanner(System.in);
-        System.out.println("Enter dept_id: ");
+        System.out.println("Enter address_id: ");
         int address_id = Integer.parseInt(in.nextLine());
         String stringUpdate = null;
         int intUpdate = 0;
@@ -73,49 +71,56 @@ public class AddressDAOClass implements DAO{
         System.out.println("Enter 5 for zip");
         int select = Integer.parseInt(in.nextLine());
         try {
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE address SET ? = ? WHERE address_id = ?");
             switch (select) {
                 case 1:
                     System.out.println("Insert new address_id: ");
                     intUpdate = Integer.parseInt(in.nextLine());
-                    pstmt.setString(1, "address_id");
-                    pstmt.setInt(2, intUpdate);
-                    pstmt.setInt(3, address_id);
+                    PreparedStatement pstmt = conn.prepareStatement("UPDATE address SET address_id = ? WHERE address_id = ?");
+                    pstmt.setInt(1, intUpdate);
+                    pstmt.setInt(2, address_id);
+                    rows = pstmt.executeUpdate();
+                    pstmt.close();
                     break;
                 case 2:
                     System.out.println("Insert new street");
                     stringUpdate = in.nextLine();
-                    pstmt.setString(1, "street");
-                    pstmt.setString(2, stringUpdate);
-                    pstmt.setInt(3, address_id);
+                    PreparedStatement pstmt2 = conn.prepareStatement("UPDATE address SET street = ? WHERE address_id = ?");
+                    pstmt2.setString(1, stringUpdate);
+                    pstmt2.setInt(2, address_id);
+                    rows = pstmt2.executeUpdate();
+                    pstmt2.close();
                     break;
                 case 3:
                     System.out.println("Insert new city");
                     stringUpdate = in.nextLine();
-                    pstmt.setString(1, "city");
-                    pstmt.setString(2, stringUpdate);
-                    pstmt.setInt(3, address_id);
+                    PreparedStatement pstmt3 = conn.prepareStatement("UPDATE address SET city = ? WHERE address_id = ?");
+                    pstmt3.setString(1, stringUpdate);
+                    pstmt3.setInt(2, address_id);
+                    rows = pstmt3.executeUpdate();
+                    pstmt3.close();
                     break;
                 case 4:
                     System.out.println("Insert new state");
                     intUpdate = Integer.parseInt(in.nextLine());
-                    pstmt.setString(1, "state");
-                    pstmt.setString(2, stringUpdate);
-                    pstmt.setInt(3, address_id);
+                    PreparedStatement pstmt4 = conn.prepareStatement("UPDATE address SET state = ? WHERE address_id = ?");
+                    pstmt4.setString(1, stringUpdate);
+                    pstmt4.setInt(2, address_id);
+                    rows = pstmt4.executeUpdate();
+                    pstmt4.close();
                     break;
                 case 5:
                     System.out.println("Insert new zip");
                     intUpdate = Integer.parseInt(in.nextLine());
-                    pstmt.setString(1, "zip");
-                    pstmt.setString(2, stringUpdate);
-                    pstmt.setInt(3, address_id);
+                    PreparedStatement pstmt5 = conn.prepareStatement("UPDATE address SET zip = ? WHERE address_id = ?");
+                    pstmt5.setString(2, stringUpdate);
+                    pstmt5.setInt(3, address_id);
+                    rows = pstmt5.executeUpdate();
+                    pstmt5.close();
                     break;
                 default:
                     System.out.println("Invalid input");
                     break;
             }
-            rows = pstmt.executeUpdate();
-            pstmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -130,7 +135,7 @@ public class AddressDAOClass implements DAO{
         System.out.println("Enter address_id: ");
         int address_id = Integer.parseInt(in.nextLine());
         try{
-            PreparedStatement pstmt = conn.prepareStatement("DELETE FROM address WHERE dept_id = ?");
+            PreparedStatement pstmt = conn.prepareStatement("DELETE FROM address WHERE address_id = ?");
             pstmt.setInt(1,address_id);
             rows = pstmt.executeUpdate();
             pstmt.close();
