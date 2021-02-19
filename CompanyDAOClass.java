@@ -1,11 +1,8 @@
 package com.cognixia.jumo.jdbc.connect;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class CompanyDAOClass implements DAO{
@@ -102,63 +99,74 @@ public class CompanyDAOClass implements DAO{
         System.out.println("Enter 7 for revenue in millions");
         int select = Integer.parseInt(in.nextLine());
         try {
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE company SET ? = ? WHERE company_id = ?");
             switch (select) {
                 case 1:
                     System.out.println("Insert new company_id: ");
                     intUpdate = Integer.parseInt(in.nextLine());
-                    pstmt.setString(1, "company_id");
-                    pstmt.setInt(2, intUpdate);
-                    pstmt.setInt(3, company_id);
+                    PreparedStatement pstmt = conn.prepareStatement("UPDATE company SET company_id = ? WHERE company_id = ?");
+                    pstmt.setInt(1, intUpdate);
+                    pstmt.setInt(2, company_id);
+                    rows = pstmt.executeUpdate();
+                    pstmt.close();
                     break;
                 case 2:
                     System.out.println("Insert new company_name");
                     stringUpdate = in.nextLine();
-                    pstmt.setString(1, "company_name");
-                    pstmt.setString(2, stringUpdate);
-                    pstmt.setInt(3, company_id);
+                    PreparedStatement pstmt2 = conn.prepareStatement("UPDATE company SET company_name = ? WHERE company_id = ?");
+                    pstmt2.setString(1, stringUpdate);
+                    pstmt2.setInt(2, company_id);
+                    rows = pstmt2.executeUpdate();
+                    pstmt2.close();
                     break;
                 case 3:
                     System.out.println("Insert new headquarters");
                     stringUpdate = in.nextLine();
-                    pstmt.setString(1, "headquarters");
-                    pstmt.setString(2, stringUpdate);
-                    pstmt.setInt(3, company_id);
+                    PreparedStatement pstmt3 = conn.prepareStatement("UPDATE company SET headquarters = ? WHERE company_id = ?");
+                    pstmt3.setString(1, stringUpdate);
+                    pstmt3.setInt(2, company_id);
+                    rows = pstmt3.executeUpdate();
+                    pstmt3.close();
                     break;
                 case 4:
                     System.out.println("Insert new industry");
                     stringUpdate = in.nextLine();
-                    pstmt.setString(1, "industry");
-                    pstmt.setString(2, stringUpdate);
-                    pstmt.setInt(3, company_id);
+                    PreparedStatement pstmt4 = conn.prepareStatement("UPDATE company SET industry = ? WHERE company_id = ?");
+                    pstmt4.setString(1, stringUpdate);
+                    pstmt4.setInt(2, company_id);
+                    rows = pstmt4.executeUpdate();
+                    pstmt4.close();
                     break;
                 case 5:
                     System.out.println("Insert new global_strategy");
                     stringUpdate = in.nextLine();
-                    pstmt.setString(1, "global_strategy");
-                    pstmt.setString(2, stringUpdate);
-                    pstmt.setInt(3, company_id);
+                    PreparedStatement pstmt5 = conn.prepareStatement("UPDATE company SET global_strategy = ? WHERE company_id = ?");
+                    pstmt5.setString(1, stringUpdate);
+                    pstmt5.setInt(2, company_id);
+                    rows = pstmt5.executeUpdate();
+                    pstmt5.close();
                     break;
                 case 6:
                     System.out.println("Insert new organizational_culture");
                     stringUpdate = in.nextLine();
-                    pstmt.setString(1, "organizational_culture");
-                    pstmt.setString(2, stringUpdate);
-                    pstmt.setInt(3, company_id);
+                    PreparedStatement pstmt6 = conn.prepareStatement("UPDATE company SET organizational_culture = ? WHERE company_id = ?");
+                    pstmt6.setString(1, stringUpdate);
+                    pstmt6.setInt(2, company_id);
+                    rows = pstmt6.executeUpdate();
+                    pstmt6.close();
                     break;
                 case 7:
                     System.out.println("Insert new revenue_in_millions");
                     intUpdate = Integer.parseInt(in.nextLine());
-                    pstmt.setString(1, "revenue_in_millions");
-                    pstmt.setInt(2, intUpdate);
-                    pstmt.setInt(3, company_id);
+                    PreparedStatement pstmt7 = conn.prepareStatement("UPDATE company SET revenue_in_millions = ? WHERE company_id = ?");
+                    pstmt7.setInt(1, intUpdate);
+                    pstmt7.setInt(2, company_id);
+                    rows = pstmt7.executeUpdate();
+                    pstmt7.close();
                     break;
                 default:
                     System.out.println("Invalid input");
                     break;
             }
-            rows = pstmt.executeUpdate();
-            pstmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
