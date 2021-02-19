@@ -56,7 +56,7 @@ public interface DAO {
             while (rs.next()) {
                 Department d = new Department(rs.getInt("dept_id"), rs.getString("dept_name"), rs.getString("cell"),rs.getInt("budget"),rs.getInt("company_id"));
                 depts.add(d);
-                
+                System.out.println(depts.toString());
             }
 
         } catch (SQLException e) {
@@ -95,8 +95,8 @@ public interface DAO {
                         rs.getString("dob"),
                         rs.getInt("dept_id"),
                         rs.getInt("address_id"));
-                emps.add(e);
-               
+                        emps.add(e);
+                        System.out.println(e.toString());
             }
 
         } catch (SQLException e) {
@@ -143,7 +143,7 @@ public interface DAO {
                         rs.getString("global_strategy"),
                         rs.getString("organizational_culture"),
                         rs.getInt("revenue_in_millions"));
-                comps.add(c);
+                        comps.add(c);
                
             }
 
