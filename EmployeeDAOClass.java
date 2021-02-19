@@ -1,5 +1,6 @@
 package com.cognixia.jumo.jdbc.connect;
 
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -101,62 +102,73 @@ public class EmployeeDAOClass implements DAO {
         System.out.println("Enter 7 for address id");
         int select = Integer.parseInt(in.nextLine());
         try {
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE employee SET ? = ? WHERE emp_id = ?");
             switch (select) {
                 case 1:
                     System.out.println("Insert new emp_id: ");
                     intUpdate = Integer.parseInt(in.nextLine());
-                    pstmt.setString(1, "emp_id");
-                    pstmt.setInt(2, intUpdate);
-                    pstmt.setInt(3, emp_id);
+                    PreparedStatement pstmt = conn.prepareStatement("UPDATE employee SET emp_id = ? WHERE emp_id = ?");
+                    pstmt.setInt(1, intUpdate);
+                    pstmt.setInt(2, emp_id);
+                    rows = pstmt.executeUpdate();
+                    pstmt.close();
                     break;
                 case 2:
                     System.out.println("Insert new emp_name: ");
                     stringUpdate = in.nextLine();
-                    pstmt.setString(1, "emp_name");
-                    pstmt.setString(2, stringUpdate);
-                    pstmt.setInt(3, emp_id);
+                    PreparedStatement pstmt2 = conn.prepareStatement("UPDATE employee SET emp_name = ? WHERE emp_id = ?");
+                    pstmt2.setString(1, stringUpdate);
+                    pstmt2.setInt(2, emp_id);
+                    rows = pstmt2.executeUpdate();
+                    pstmt2.close();
                     break;
                 case 3:
                     System.out.println("Insert new job_title");
                     stringUpdate = in.nextLine();
-                    pstmt.setString(1, "job_title");
-                    pstmt.setString(2, stringUpdate);
-                    pstmt.setInt(3, emp_id);
+                    PreparedStatement pstmt3 = conn.prepareStatement("UPDATE employee SET job_title = ? WHERE emp_id = ?");
+                    pstmt3.setString(1, stringUpdate);
+                    pstmt3.setInt(2, emp_id);
+                    rows = pstmt3.executeUpdate();
+                    pstmt3.close();
                     break;
                 case 4:
                     System.out.println("Insert new salary");
                     intUpdate = Integer.parseInt(in.nextLine());
-                    pstmt.setString(1, "salary");
-                    pstmt.setString(2, stringUpdate);
-                    pstmt.setInt(3, emp_id);
+                    PreparedStatement pstmt4 = conn.prepareStatement("UPDATE employee SET salary = ? WHERE emp_id = ?");
+                    pstmt4.setString(1, stringUpdate);
+                    pstmt4.setInt(2, emp_id);
+                    rows = pstmt4.executeUpdate();
+                    pstmt4.close();
                     break;
                 case 5:
                     System.out.println("Insert new dob");
                     intUpdate = Integer.parseInt(in.nextLine());
-                    pstmt.setString(1, "dob");
-                    pstmt.setString(2, stringUpdate);
-                    pstmt.setInt(3, emp_id);
+                    PreparedStatement pstmt5 = conn.prepareStatement("UPDATE employee SET dob = ? WHERE emp_id = ?");
+                    pstmt5.setString(1, stringUpdate);
+                    pstmt5.setInt(2, emp_id);
+                    rows = pstmt5.executeUpdate();
+                    pstmt5.close();
                     break;
                 case 6:
                     System.out.println("Insert new dept_id");
                     intUpdate = Integer.parseInt(in.nextLine());
-                    pstmt.setString(1, "dept_id");
-                    pstmt.setString(2, stringUpdate);
-                    pstmt.setInt(3, emp_id);
+                    PreparedStatement pstmt6 = conn.prepareStatement("UPDATE employee SET dept_id = ? WHERE emp_id = ?");
+                    pstmt6.setString(1, stringUpdate);
+                    pstmt6.setInt(2, emp_id);
+                    rows = pstmt6.executeUpdate();
+                    pstmt6.close();
                     break;
                 case 7:
                     System.out.println("Insert new address_id");
-                    pstmt.setString(1, "address_id");
-                    pstmt.setString(2, stringUpdate);
-                    pstmt.setInt(3, emp_id);
+                    PreparedStatement pstmt7 = conn.prepareStatement("UPDATE employee SET address_id = ? WHERE emp_id = ?");
+                    pstmt7.setString(1, stringUpdate);
+                    pstmt7.setInt(2, emp_id);
+                    rows = pstmt7.executeUpdate();
+                    pstmt7.close();
                     break;
                 default:
                     System.out.println("Invalid input");
                     break;
             }
-            rows = pstmt.executeUpdate();
-            pstmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
