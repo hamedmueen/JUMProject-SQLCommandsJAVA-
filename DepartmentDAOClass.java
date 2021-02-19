@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 
@@ -18,11 +16,11 @@ public class DepartmentDAOClass implements DAO {
     public boolean createTable() throws SQLException{
         Statement stmt = conn.createStatement();
         boolean count = stmt.execute("CREATE TABLE department(" +
-                " dept_id INT PRIMARY KEY NOT NULL, " +
-                " dept_name VARCHAR(20) NOT NULL, " +
-                " cell VARCHAR(15) NOT NULL, " +
-                " budget INT NOT NULL, " +
-                " company_id INT NOT NULL, "
+                        " dept_id INT PRIMARY KEY NOT NULL, " +
+                        " dept_name VARCHAR(20) NOT NULL, " +
+                        " cell VARCHAR(15) NOT NULL, " +
+                        " budget INT NOT NULL, " +
+                        " company_id INT NOT NULL, " +
                 " FOREIGN KEY (company_id) REFERENCES company(company_id))");
         return count;
     }
@@ -117,42 +115,48 @@ public class DepartmentDAOClass implements DAO {
         System.out.println("Enter 4 for budget");
         int select = Integer.parseInt(in.nextLine());
         try {
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE department SET ? = ? WHERE dept_id = ?");
+
             switch (select) {
                 case 1:
                     System.out.println("Insert new dept_id: ");
                     intUpdate = Integer.parseInt(in.nextLine());
-                    pstmt.setString(1, "dept_id");
-                    pstmt.setInt(2, intUpdate);
-                    pstmt.setInt(3, dept_id);
+                    PreparedStatement pstmt = conn.prepareStatement("UPDATE department SET dept_id = ? WHERE dept_id = ?");
+                    pstmt.setInt(1, intUpdate);
+                    pstmt.setInt(2, dept_id);
+                    rows = pstmt.executeUpdate();
+                    pstmt.close();
                     break;
                 case 2:
                     System.out.println("Insert new dept_name");
                     stringUpdate = in.nextLine();
-                    pstmt.setString(1, "dept_name");
-                    pstmt.setString(2, stringUpdate);
-                    pstmt.setInt(3, dept_id);
+                    PreparedStatement pstmt2 = conn.prepareStatement("UPDATE department SET dept_name = ? WHERE dept_id = ?");
+                    pstmt2.setString(1, stringUpdate);
+                    pstmt2.setInt(2, dept_id);
+                    rows = pstmt2.executeUpdate();
+                    pstmt2.close();
                     break;
                 case 3:
                     System.out.println("Insert new cell");
                     stringUpdate = in.nextLine();
-                    pstmt.setString(1, "cell");
-                    pstmt.setString(2, stringUpdate);
-                    pstmt.setInt(3, dept_id);
+                    PreparedStatement pstmt3 = conn.prepareStatement("UPDATE department SET cell = ? WHERE dept_id = ?");
+                    pstmt3.setString(1, stringUpdate);
+                    pstmt3.setInt(2, dept_id);
+                    rows = pstmt3.executeUpdate();
+                    pstmt3.close();
                     break;
                 case 4:
                     System.out.println("Insert new budget");
                     intUpdate = Integer.parseInt(in.nextLine());
-                    pstmt.setString(1, "budget");
-                    pstmt.setInt(2, intUpdate);
-                    pstmt.setInt(3, dept_id);
+                    PreparedStatement pstmt4 = conn.prepareStatement("UPDATE department SET budget = ? WHERE dept_id = ?");
+                    pstmt4.setInt(1, intUpdate);
+                    pstmt4.setInt(2, dept_id);
+                    rows = pstmt4.executeUpdate();
+                    pstmt4.close();
                     break;
                 default:
                     System.out.println("Invalid input");
                     break;
             }
-            rows = pstmt.executeUpdate();
-            pstmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
