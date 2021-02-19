@@ -73,7 +73,7 @@ public class AddressDAOClass implements DAO{
         System.out.println("Enter 5 for zip");
         int select = Integer.parseInt(in.nextLine());
         try {
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE address SET ? = ? WHERE dept_id = ?");
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE address SET ? = ? WHERE address_id = ?");
             switch (select) {
                 case 1:
                     System.out.println("Insert new address_id: ");
